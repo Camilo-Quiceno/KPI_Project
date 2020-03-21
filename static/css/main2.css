@@ -1,11 +1,9 @@
 html, body {
-    background: #fafafa;
+    background: #00;
     height: 100%;
     width: 100%;
     font-family: 'Roboto', sans-serif;
-    
 }
-
 
 #auth-container {
     background: #fff;

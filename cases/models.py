@@ -17,7 +17,7 @@ class Case(models.Model):
     is_qc = models.CharField(max_length=30,blank=False)
     is_rejected = models.CharField(max_length=30,blank=True)
 
-    time = models.CharField(max_length=30,blank=False)
+    time = models.IntegerField(blank=False)
 
     created = models.DateTimeField(auto_now_add=True)
 
