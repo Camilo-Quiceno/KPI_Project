@@ -20,6 +20,7 @@ class CaseForm(forms.ModelForm):
                 'step',
                 'surgery_type',
                 'is_qc',
+                'is_complex',
                 'is_rejected',
                 'time'
         )

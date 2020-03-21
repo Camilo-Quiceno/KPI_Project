@@ -10,14 +10,16 @@ class Case(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
 
-    case_id = models.CharField(max_length=11,blank=False)
+    case_id = models.CharField(max_length=12,blank=False,null=False)
     step = models.CharField(max_length=30,blank=False)
     surgery_type = models.CharField(max_length=30,blank=False)
     
-    is_qc = models.CharField(max_length=30,blank=False)
-    is_rejected = models.CharField(max_length=30,blank=True)
+    is_qc = models.BooleanField(blank=False)
+    is_complex = models.BooleanField(blank=False)
 
-    time = models.IntegerField(blank=False)
+    is_rejected = models.BooleanField(blank=True)
+
+    time = models.IntegerField(blank=False,null=False)
 
     created = models.DateTimeField(auto_now_add=True)
 
