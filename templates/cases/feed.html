@@ -6,14 +6,8 @@
 
 {% block container %}
 
-<div class="container">
-    <div class="row">
-        <h4>Hola</h4>
-    </div>
-</div>
-
-<div class="container h-100">
-    <div class="row h-100 justify-content-center align-items-center">
+<div   class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center" id="box-feed">
         <div class="col-sm-12 col-md-5 col-lg-5 pt-2 pl-5 pr-5 pb-5" id="auth-container">
             <div class="row">
                 <h2>What do you want to do?</h2>
@@ -21,6 +15,11 @@
             <form action="{% url "cases:create" %}">
                 <div class="row">
                     <button  class="btn btn-primary btn-block mt-5" type="submit">Create case</button>
+                </div>
+            </form>
+            <form action="{% url "cases:list" %}">
+                <div class="row">
+                    <button  class="btn btn-primary btn-block mt-5" type="submit">All my cases</button>
                 </div>
             </form>
             <form action="{% url "users:signup" %}">

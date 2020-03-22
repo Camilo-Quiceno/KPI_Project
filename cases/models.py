@@ -17,11 +17,13 @@ class Case(models.Model):
     is_qc = models.BooleanField(blank=False)
     is_complex = models.BooleanField(blank=False)
 
-    is_rejected = models.BooleanField(blank=True)
+    is_rejected = models.BooleanField(blank=True, null=True)
 
     time = models.IntegerField(blank=False,null=False)
 
     created = models.DateTimeField(auto_now_add=True)
+
+    comments = models.CharField(max_length=1000,blank=True)
 
     def __str__(self):
         """Return case id"""

@@ -3,14 +3,23 @@
 #Django
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
+from django.views.generic import CreateView,ListView
 from django.urls import reverse_lazy
+
+#Models
+from cases.models import Case
 
 #Forms
 from cases.forms import CaseForm
 
 class CasesFeedView(LoginRequiredMixin,TemplateView):
     template_name = "cases/feed.html"
+
+class CasesListView(LoginRequiredMixin,ListView):
+    template_name = "cases/listcases.html"
+    model = Case
+    ordering = ('-created')
+    context_object_name = 'cases'
 
 class CasesCreateView(LoginRequiredMixin, CreateView):
     """Create new post-view"""

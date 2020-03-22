@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>List of cases</title>
+{% endblock%}
+<!DOCTYPE html>
+{% block container %}
+    <div id="box-feed">
+        <table class="table" >
+            
+            <tr class="table-primary">
+                <th scope="col">Case id</th>
+                <th scope="col">Step</th>
+                <th scope="col">Surgery type</th>
+                <th scope="col">QC?</th>
+                <th scope="col">Complex?</th>
+                <th scope="col">Rejected?</th>
+                <th scope="col">Time?</th>
+                <th scope="col">Comments</th>
+                <th scope="col">Created</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for case in cases %}
+            <tr>
+                <td>{{case.case_id}}</td>
+                <td>{{case.step}}</td>
+                <td>{{case.surgery_type}}</td>
+                <td>{{case.is_qc}}</td>
+                <td>{{case.is_complex}}</td>
+                <td>{{case.is_rejected}}</td>
+                <td>{{case.time}}</td>
+                <td>{{case.comments}}</td>
+                <td>{{case.created}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+{% endblock %}

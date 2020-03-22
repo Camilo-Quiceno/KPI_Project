@@ -18,8 +18,10 @@ class PostAdmin(admin.ModelAdmin):
                 'is_qc',
                 'is_complex',
                 'is_rejected',
-                'time'
+                'time',
+                'comments',
+                'created',
     )
 
     search_fields=('case_id','step','surgery_type',)
-    list_filter=('step','surgery_type','is_qc')
+    list_filter=('step','surgery_type','is_qc','created')

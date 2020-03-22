@@ -22,5 +22,6 @@ class CaseForm(forms.ModelForm):
                 'is_qc',
                 'is_complex',
                 'is_rejected',
-                'time'
+                'time',
+                'comments'
         )

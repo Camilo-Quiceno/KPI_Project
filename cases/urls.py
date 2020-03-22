@@ -20,4 +20,9 @@ urlpatterns = [
         view=views.CasesCreateView.as_view(),
         name='create'
     ),
+    path(
+        route='cases/listcases/',
+        view=views.CasesListView.as_view(),
+        name='list'
+    ),
 ]

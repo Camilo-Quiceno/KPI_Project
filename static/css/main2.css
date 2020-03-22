@@ -1,5 +1,5 @@
 html, body {
-    background: #00;
+    background: #fff;
     height: 100%;
     width: 100%;
     font-family: 'Roboto', sans-serif;
@@ -9,6 +9,7 @@ html, body {
     background: #fff;
     border: 1px solid #e6e6e6;
     border-radius: 1px;
+    
 }
 
 #main-navbar {
@@ -44,3 +45,6 @@ html, body {
     background: #fff;
 }
 
+#box-feed {
+    padding-top: 6em;
+}
