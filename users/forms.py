@@ -22,6 +22,7 @@ class SignupForm(forms.Form):
 
     def clean_username(self):
         """ Usename must be unique. """
+        
         username = self.cleaned_data['username'] #datos que ya limpio python y que los almacena en un dicconario
         username_taken = User.objects.filter(username=username).exists()
         if username_taken:
@@ -30,6 +31,7 @@ class SignupForm(forms.Form):
 
     def clean(self):
         """Verify password confirmation match."""
+
         data = super().clean()
 
         password = data['password']
@@ -42,6 +44,7 @@ class SignupForm(forms.Form):
 
     def save(self):
         """Create user and profile."""
+
         data = self.cleaned_data
         data.pop('password_confirmation')
 

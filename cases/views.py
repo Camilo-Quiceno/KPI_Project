@@ -21,6 +21,14 @@ class CasesListView(LoginRequiredMixin,ListView):
     ordering = ('-created')
     context_object_name = 'cases'
 
+    def get_ordering(self):
+        return self.request.GET.get('ordering','-created')
+
+    def get_context_data(self,*args,**kwards):
+        context = super(CasesListView,self).get_context_data(*args,**kwards)
+        context['current_order'] = self.get_ordering()
+        return context
+
 class CasesCreateView(LoginRequiredMixin, CreateView):
     """Create new post-view"""
 
