@@ -10,14 +10,14 @@
             
             <tr class="table-primary">
                 <th scope="col">Case</th>
-                <th scope="col">Step<a href="{% url 'cases:list' %}?ordering=step">▼</a></th>
-                <th scope="col">Surgery type<a href="{% url 'cases:list' %}?ordering=surgery_type">▼</a></th>
-                <th scope="col">QC?<a href="{% url 'cases:list' %}?ordering=is_qc">▼</a></th>
+                <th scope="col">Step<a href="{% url 'cases:list' %}?ordering=step&order={% if order == 'desc' %}asc{% else %}desc{% endif %}">▼</a></th>
+                <th scope="col">Surgery type<a href="{% url 'cases:list' %}?ordering=surgery_type&order={% if order == 'desc' %}asc{% else %}desc{% endif %}">▼</a></th>
+                <th scope="col">QC?<a href="{% url 'cases:list' %}?ordering=is_qc&order={% if order == 'desc' %}asc{% else %}desc{% endif %}">▼</a></th>
                 <th scope="col">Complex?</th>
                 <th scope="col">Rejected?</th>
-                <th scope="col">Time<a href="{% url 'cases:list' %}?ordering=time">▼</a></th>
+                <th scope="col">Time<a href="{% url 'cases:list' %}?ordering=time&order={% if order == 'desc' %}asc{% else %}desc{% endif %}">▼</a></th>
                 <th scope="col">Comments</th>
-                <th scope="col">Created <a href="{% url 'cases:list' %}?ordering=created">▼</a></th>
+                <th scope="col">Created <a href="{% url 'cases:list' %}?ordering=created&order={% if order == 'desc' %}asc{% else %}desc{% endif %}">▼</a></th>
             </tr>
             </thead>
             <tbody>

@@ -18,15 +18,20 @@ class CasesFeedView(LoginRequiredMixin,TemplateView):
 class CasesListView(LoginRequiredMixin,ListView):
     template_name = "cases/listcases.html"
     model = Case
-    ordering = ('-created')
+    ordering = ('created')
     context_object_name = 'cases'
 
     def get_ordering(self):
-        return self.request.GET.get('ordering','-created')
+        self.order = self.request.GET.get('order', 'asc')
+        selected_ordering = self.request.GET.get('ordering', 'created')
+        if self.order == "desc":
+            selected_ordering = "-" + selected_ordering
+        return selected_ordering
 
     def get_context_data(self,*args,**kwards):
         context = super(CasesListView,self).get_context_data(*args,**kwards)
         context['current_order'] = self.get_ordering()
+        context['order'] = self.order
         return context
 
 class CasesCreateView(LoginRequiredMixin, CreateView):
