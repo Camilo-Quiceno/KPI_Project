@@ -43,6 +43,7 @@ class CasesCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self,**kwargs):
         """Add user and profile to conext"""
+        
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         context['profile'] = self.request.user.profile

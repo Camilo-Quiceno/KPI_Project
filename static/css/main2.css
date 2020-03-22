@@ -48,3 +48,8 @@ html, body {
 #box-feed {
     padding-top: 6em;
 }
+
+#profile-name {
+    padding-bottom: 3em;
+    padding-top: 3em;
+}

@@ -3,7 +3,7 @@
 #Django
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView,TemplateView
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -23,7 +23,15 @@ class SignupView(FormView):
         form.save()
         return super().form_valid(form)
 
+class ProfileView(LoginRequiredMixin,TemplateView):
+    """Profile user view."""
 
+    template_name = 'users/profile.html'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    queryset = User.objects.all()
+    context_object_name = 'user'
+    
 class LoginView(auth_views.LoginView):
     """Login view"""
 

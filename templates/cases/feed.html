@@ -12,9 +12,20 @@
             <div class="row">
                 <h2>What do you want to do?</h2>
             </div>
+            <form action="{% url "users:profile" %}">
+                <div class="row">
+                    <button class="btn btn-primary btn-block mt-5" type="submit">My profile</button>
+                </div>
+            </form>
+            
             <form action="{% url "cases:create" %}">
                 <div class="row">
                     <button  class="btn btn-primary btn-block mt-5" type="submit">Create case</button>
+                </div>
+            </form>
+            <form action="{% url "cases:create" %}">
+                <div class="row">
+                    <button  class="btn btn-primary btn-block mt-5" type="submit">Report rejection</button>
                 </div>
             </form>
             <form action="{% url "cases:list" %}">
@@ -27,11 +38,7 @@
                     <button class="btn btn-primary btn-block mt-5" type="submit">My KPI</button>
                 </div>
             </form>
-            <form action="{% url "users:signup" %}">
-                <div class="row">
-                    <button class="btn btn-primary btn-block mt-5" type="submit">My profile</button>
-                </div>
-            </form>
+            
         </div>
     </div>
 </div>
