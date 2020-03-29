@@ -28,7 +28,12 @@
                             id="case_id"
                             placeholder="Case IDs"
                             onkeyup="this.value = this.value.toUpperCase();"
+                            {% if case_id %}
+                                value = {{ case_id }}
+                            {% endif %} 
+
                         >
+                        
                         {% if messages %}
                        
                             {% for message in messages %}
@@ -45,6 +50,24 @@
                             {% endfor %}
                         
                         {% endif %}
+                        
+                        {% if comments %}
+                            <div class="list-group">
+                                <a class="list-group-item list-group-item-success">
+                                Store data: {{ case_id }}
+                                </a>
+                                <a class="list-group-item list-group-item-action">Case Step: {{step}}</a>
+                                <a class="list-group-item list-group-item-action">Surgery Type: {{surgery_type}}</a>
+                                <a class="list-group-item list-group-item-action">Is it a QC? {{is_qc}}</a>
+                                <a class="list-group-item list-group-item-action">Is it complex? {{is_complex}}</a>
+                                <a class="list-group-item list-group-item-action">Time: {{time}}</a>
+                                <a class="list-group-item list-group-item-action">Is it rejected? {{is_rejected}}</a>
+                                <a class="list-group-item list-group-item-action">Comments: {{comments}}</a>
+                                
+                            </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-outline-primary" name="search" >Search</button>
                         <div class="invalid-feedback">
                             {% for error in form.case_id.errors %}{{ error }}{% endfor %}
                         </div>
@@ -137,8 +160,7 @@
                             {% for error in form.caseid.errors %}{{ error }}{% endfor %}
                         </div>
                     </div>
-
-
+                
                     <button type="submit" class="btn btn-primary btn-block mt-5" name="update">Update</button>
                     <button type="submit" class="btn btn-danger btn-block" name="delete" >Delete</button>
 

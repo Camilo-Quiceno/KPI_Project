@@ -76,6 +76,8 @@ def MyUpdateView(request):
                     case.comments = data['comments']
                     case.save()
                     messages.success(request, 'Updated successfully!')  
+                else:
+                    messages.error(request, "Case ID not found, Try again!")
             else:
                 messages.error(request, "Case ID not found, Try again!")
 
@@ -95,14 +97,50 @@ def MyUpdateView(request):
 
                 if usercase == userrequest:
                     case.delete()
-                    messages.success(request, 'DELETE successfully!')  
+                    messages.success(request, 'DELETE successfully!') 
+                else:
+                    messages.error(request, "Case ID not found, Try again!") 
             else:
                 messages.error(request, "Case ID not found, Try again!")
                 
         except:
             messages.error(request, "Case ID not found, Try again!")
 
+    elif request.method == 'POST' and 'search' in request.POST:
 
+        case_id = request.POST['case_id']
+
+        try:
+            case = Case.objects.filter(case_id=case_id).last()
+            
+            if case:
+            
+                usercase = case.user
+                userrequest = request.user
+
+                if usercase == userrequest:
+        
+                    return render(request, 'cases/updatecase.html',
+                                {
+                                'case_id': case.case_id,
+                                'step': case.step,
+                                'surgery_type': case.surgery_type,
+                                'is_qc': case.is_qc,
+                                'is_complex': case.is_complex,
+                                'time': case.time,
+                                'is_rejected': case.is_rejected,
+                                'comments': case.comments
+                                }
+                    )
+                    
+                else:
+                    messages.error(request, "Case ID not found, Try again!")
+            else:
+                messages.error(request, "Case ID not found, Try again!")
+                
+        except:
+            messages.error(request, "Case ID not found, Try again!")
+        
     return render(request, 'cases/updatecase.html')
 
   
