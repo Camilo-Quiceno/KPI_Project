@@ -7,6 +7,7 @@ from django.views.generic import CreateView,ListView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django import forms
 from django.shortcuts import render
+from django.contrib import messages
 
 #Models
 from cases.models import Case
@@ -52,6 +53,36 @@ class CasesCreateView(LoginRequiredMixin, CreateView):
         return context
 
 def MyUpdateView(request):
+    if request.method == 'POST':
+        
+        case_id = request.POST['case_id']
+        
+    
+        try:
+            case = Case.objects.get(case_id=case_id)
+
+            if case:
+                print("Existe")
+
+                usercase = case.user
+                userrequest = request.user
+
+                if usercase == userrequest:
+                    data = request.POST
+                    case.step = data['step']
+                    case.surgery_type = data['surgery_type']
+                    case.is_qc = data['is_qc']
+                    case.is_complex = data['is_complex']
+                    case.time = data['time']
+                    case.is_rejected = data['is_rejected']
+                    case.comments = data['comments']
+                    case.save()
+                    messages.success(request, 'updated successfully!')
+
+        except:
+            messages.error(request, "Case ID not found")
+            print("No existe papi")
+
     return render(request, 'cases/updatecase.html')
 
   
