@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView,ListView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django import forms
+from django.shortcuts import render
+from django.contrib import messages
 
 #Models
 from cases.models import Case
@@ -50,39 +52,37 @@ class CasesCreateView(LoginRequiredMixin, CreateView):
         context['profile'] = self.request.user.profile
         return context
 
-class CaseUpdateView(LoginRequiredMixin,UpdateView):
-
-
-    template_name = "cases/updatecase.html"
-    model = Case
-    success_url = "/"
-    fields = (
-                'step',
-                'surgery_type',
-                'is_qc',
-                'is_complex',
-                'is_rejected',
-                'time',
-                'comments'
-        )
+def MyUpdateView(request):
+    if request.method == 'POST':
+        
+        case_id = request.POST['case_id']
+        
     
-    
-   
-    def get_object(self):
+        try:
+            case = Case.objects.get(case_id=case_id)
 
-        case = self.request.POST.get('case_id')
-        if case == None or case =='':
-            case_id = self.request.user
-        else:
-            case_id = Case.objects.filter(case_id=case).exists()
-            if case_id:
-                case_id = Case.objects.get(case_id=case)
-                user = case_id.user.username
-                user2=str(self.request.user)
-                if user != user2:
-                    case_id=self.request.user
-            else:
-                case_id = self.request.user
-        return case_id
+            if case:
+                
+
+                usercase = case.user
+                userrequest = request.user
+
+                if usercase == userrequest:
+                    data = request.POST
+                    case.step = data['step']
+                    case.surgery_type = data['surgery_type']
+                    case.is_qc = data['is_qc']
+                    case.is_complex = data['is_complex']
+                    case.time = data['time']
+                    case.is_rejected = data['is_rejected']
+                    case.comments = data['comments']
+                    case.save()
+                    messages.success(request, 'Updated successfully!')
+
+        except:
+            messages.error(request, "Case ID not found, Try again!")
+            
+
+    return render(request, 'cases/updatecase.html')
 
   

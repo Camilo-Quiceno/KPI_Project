@@ -15,16 +15,15 @@ urlpatterns = [
         view=views.CasesFeedView.as_view(),
         name='feed'
     ),
+
     path(
         route='cases/new/',
         view=views.CasesCreateView.as_view(),
         name='create'
     ),
-    path(
-        route='cases/updatecase/',
-        view=views.CaseUpdateView.as_view(),
-        name='updatecase'
-    ),
+
+    path('cases/updatecase/', views.MyUpdateView,name="updatecase"), 
+
     path(
         route='cases/listcases/',
         view=views.CasesListView.as_view(),

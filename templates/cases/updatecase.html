@@ -14,7 +14,7 @@
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     
-                    {{ message }}
+                    
                     <input type="hidden" name="user" value="{{ user.pk}}" />
                     <input type="hidden" name="profile" value="{{ profile.pk }}"/>
                     
@@ -25,15 +25,29 @@
                             class="form-control {% if form.case_id.errors %}is-invalid{% endif %}"
                             type="text"
                             name="case_id"
-                            id="case_ids"
-                            placeholder="Case ID"
+                            id="case_id"
+                            placeholder="Case IDs"
                             onkeyup="this.value = this.value.toUpperCase();"
                         >
+                        {% if messages %}
+                       
+                            {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endif %} 
+                                {% if message.tags == "success" %}
+                                    <div class="alert alert-success" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endif %}    
+                            {% endfor %}
                         
+                        {% endif %}
                         <div class="invalid-feedback">
                             {% for error in form.case_id.errors %}{{ error }}{% endfor %}
                         </div>
-                        <button  href="{% url 'cases:list' %}" type="submit" class="btn btn-danger" >Search</button>
                     </div>
 
                     <div class="form-group">
