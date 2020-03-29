@@ -62,7 +62,7 @@ def MyUpdateView(request):
             case = Case.objects.get(case_id=case_id)
 
             if case:
-                print("Existe")
+                
 
                 usercase = case.user
                 userrequest = request.user
@@ -77,11 +77,11 @@ def MyUpdateView(request):
                     case.is_rejected = data['is_rejected']
                     case.comments = data['comments']
                     case.save()
-                    messages.success(request, 'updated successfully!')
+                    messages.success(request, 'Updated successfully!')
 
         except:
-            messages.error(request, "Case ID not found")
-            print("No existe papi")
+            messages.error(request, "Case ID not found, Try again!")
+            
 
     return render(request, 'cases/updatecase.html')
 
