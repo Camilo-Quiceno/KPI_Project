@@ -30,5 +30,3 @@ class Case(models.Model):
         return '{}'.format(self.case_id)
 
 
-
-

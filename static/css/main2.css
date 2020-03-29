@@ -53,3 +53,7 @@ html, body {
     padding-bottom: 3em;
     padding-top: 3em;
 }
+
+#search-button {
+    padding-top: 3em;
+}

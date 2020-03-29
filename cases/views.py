@@ -3,8 +3,9 @@
 #Django
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView,ListView
-from django.urls import reverse_lazy
+from django.views.generic import CreateView,ListView, UpdateView
+from django.urls import reverse_lazy, reverse
+from django import forms
 
 #Models
 from cases.models import Case
@@ -49,4 +50,39 @@ class CasesCreateView(LoginRequiredMixin, CreateView):
         context['profile'] = self.request.user.profile
         return context
 
+class CaseUpdateView(LoginRequiredMixin,UpdateView):
 
+
+    template_name = "cases/updatecase.html"
+    model = Case
+    success_url = "/"
+    fields = (
+                'step',
+                'surgery_type',
+                'is_qc',
+                'is_complex',
+                'is_rejected',
+                'time',
+                'comments'
+        )
+    
+    
+   
+    def get_object(self):
+
+        case = self.request.POST.get('case_id')
+        if case == None or case =='':
+            case_id = self.request.user
+        else:
+            case_id = Case.objects.filter(case_id=case).exists()
+            if case_id:
+                case_id = Case.objects.get(case_id=case)
+                user = case_id.user.username
+                user2=str(self.request.user)
+                if user != user2:
+                    case_id=self.request.user
+            else:
+                case_id = self.request.user
+        return case_id
+
+  

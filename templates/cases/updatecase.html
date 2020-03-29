@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Update Case</title>
+{% endblock %}
+<!DOCTYPE html>
+{% block container %}
+
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-6 pt-3 pb-3" id="profile-box">
+                <h4 class="mb-4">Update Case</h4>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {{ message }}
+                    <input type="hidden" name="user" value="{{ user.pk}}" />
+                    <input type="hidden" name="profile" value="{{ profile.pk }}"/>
+                    
+                    {# Website field #}
+                    <div class="form-group">
+                        <input
+                            required
+                            class="form-control {% if form.case_id.errors %}is-invalid{% endif %}"
+                            type="text"
+                            name="case_id"
+                            id="case_ids"
+                            placeholder="Case ID"
+                            onkeyup="this.value = this.value.toUpperCase();"
+                        >
+                        
+                        <div class="invalid-feedback">
+                            {% for error in form.case_id.errors %}{{ error }}{% endfor %}
+                        </div>
+                        <button  href="{% url 'cases:list' %}" type="submit" class="btn btn-danger" >Search</button>
+                    </div>
+
+                    <div class="form-group">
+                        <select 
+                            required
+                            class="browser-default custom-select"
+                            name="step"
+                            
+                        >
+                            <option selected="">Steps</option>
+                            <option value="Segmentation">Segmentation</option>
+                            <option value="Desing">Desing</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            {% for error in form.caseid.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <select  
+                            class="browser-default custom-select"
+                            name="surgery_type"
+                        >
+                            <option selected="">Surgery type</option>
+                            <option value="Orthognatic">Orthognatic</option>
+                            <option value="Reconstruction">Reconstruction</option>
+                            <option value="PSI">PSI</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <select  
+                            class="browser-default custom-select"
+                            name="is_qc"
+                        >
+                            <option selected="">Is it a QC?</option>
+                            <option value="True">YES</option>
+                            <option value="False">NO</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select  
+                            class="browser-default custom-select"
+                            name="is_complex"
+                        >
+                            <option selected="">Is it a Complex Case?</option>
+                            <option value="True">YES</option>
+                            <option value="False">NO</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input
+                            class="form-control {% if form.time.errors %}is-invalid{% endif %}"
+                            type="number"
+                            name="time"
+                            placeholder="Time Required"
+                        >
+                                                    
+                        <div class="invalid-feedback">
+                            {% for error in form.time.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select  
+                            class="browser-default custom-select"
+                            name="is_rejected"
+                        >
+                            <option selected="">Rejected?</option>
+                            <option value="True">YES</option>
+                            <option value="False">NO</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input
+                            class="form-control {% if form.comments.errors %}is-invalid{% endif %}"
+                            type="text"
+                            name="comments"
+                            placeholder="Comments"
+                        >
+                        <div class="invalid-feedback">
+                            {% for error in form.caseid.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary btn-block mt-5">Update!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

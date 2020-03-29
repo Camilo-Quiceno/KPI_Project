@@ -5,6 +5,7 @@ from django import forms
 
 #models
 from cases.models import Case
+from cases import views
 
 class CaseForm(forms.ModelForm):
     """Post model form."""
@@ -25,3 +26,5 @@ class CaseForm(forms.ModelForm):
                 'time',
                 'comments'
         )
+     
+
