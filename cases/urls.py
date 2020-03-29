@@ -20,11 +20,8 @@ urlpatterns = [
         view=views.CasesCreateView.as_view(),
         name='create'
     ),
-    path(
-        route='cases/updatecase/',
-        view=views.CaseUpdateView.as_view(),
-        name='updatecase'
-    ),
+    path('cases/updatecase/', views.MyUpdateView),
+    
     path(
         route='cases/listcases/',
         view=views.CasesListView.as_view(),
