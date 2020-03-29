@@ -59,7 +59,7 @@ def MyUpdateView(request):
         
     
         try:
-            case = Case.objects.get(case_id=case_id)
+            case = Case.objects.filter(case_id=case_id).last()
 
             if case:
                 
