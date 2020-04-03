@@ -29,6 +29,12 @@ urlpatterns = [
     ),
 
     path(
+        route='uptateprofile/',
+        view=views.UptateProfileView.as_view(),
+        name='update_profile'
+    ),
+    
+    path(
         route='logout/',
         view=views.LogoutView.as_view(),
         name='logout'

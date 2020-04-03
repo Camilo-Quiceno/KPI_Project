@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block head_content %}
     <title>Profile</title>
 {% endblock %}
@@ -9,16 +9,43 @@
 <div   class="container h-100">
     <div class="row h-100 justify-content-center " id="box-feed">
         <div class="col-sm-12 col-md-5 col-lg-8 ci pt-2 pl-5 pr-5 pb-5" id="auth-container">
-            <div class="row" id='box-feed'>
+            <div class="container" id="profile-name">
+                <div class="row justify-content-center">
+                    {% if request.user.profile.picture %}
+                        <img src="{{ request.user.profile.picture.url }}" height="100" class="d-inline-block rounded-circle"/>
+                    {% else %}
+                        <img src="{% static 'img/default-profile.png' %}" height="100" class="d-inline-block rounded-circle"/>
+                    {% endif %}
+                </div>
+            </div>            
+            
+            <div class="row">
                 <div class="col-4">
-                    <img src="{{ user.profile.picture.url }}" width="100px" />
+                    <h3>Username</h3>
                 </div>
                 <div class="col-8" >
-                    <h3>{{ user.first_name }} {{user.last_name}}</h3>
+                    <h3>@{{ request.user.username }}</h3>
                 </div>
             </div>
-    
-            <div class="row" id="profile-name">
+            <div class="row">
+                <div class="col-4">
+                    <h3>Fist Name: </h3>
+                </div>
+                <div class="col-8">
+                        <h3>{{request.user.first_name}}</h3>
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="col-4">
+                    <h3>Email: </h3>
+                </div>
+                <div class="col-8">
+                        <h3>{{request.user.email}}</h3>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-4">
                     <h3>Trained in: </h3>
                 </div>
@@ -27,9 +54,9 @@
                 </div>
             </div>
             
-            <div class="row" id="profile-name">
-                <button type="button" class="btn btn-primary btn-lg btn-block">Edit profile</button>
-            </div>
+            <form method="get" action="{% url "users:update_profile" %}">
+                <button class="btn btn-primary btn-block mt-5" type="submit">Edit Profile</button>
+            </form>
             
             
               
