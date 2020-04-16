@@ -25,7 +25,7 @@ class CasesListView(LoginRequiredMixin,ListView):
     context_object_name = 'cases'
 
     def get_ordering(self):
-        self.order = self.request.GET.get('order', 'asc')
+        
         selected_ordering = self.request.GET.get('ordering', 'created')
         if self.order == "desc":
             selected_ordering = "-" + selected_ordering
